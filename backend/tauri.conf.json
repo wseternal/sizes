@@ -6,7 +6,7 @@
     "distDir": "../frontend/dist"
   },
   "package": {
-    "productName": "size",
+    "productName": "sizes",
     "version": "0.1.0"
   },
   "tauri": {
