@@ -1,4 +1,4 @@
-use rocket::yansi::Paint;
+/*
 use std::collections::VecDeque;
 use std::num::NonZeroUsize;
 use std::sync::Arc;
@@ -20,7 +20,7 @@ pub struct AsyncRecursiveTaskBuilder<T, R> where T: Sized, R: Sized {
 impl<T, R> AsyncRecursiveTaskBuilder<T, R> where T: Sized, R: Sized {
     pub fn new() -> AsyncRecursiveTaskBuilder<T, R> {
         AsyncRecursiveTaskBuilder {
-            one_task: ,
+            one_task: None,
             max_worker_count: 0,
         }
     }
@@ -75,3 +75,4 @@ impl<T, R> AsyncRecursiveTask<T, R> where T: Sized , R: Sized {
         })
     }
 }
+*/

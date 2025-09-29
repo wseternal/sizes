@@ -1,16 +1,16 @@
 [dependencies]
-  futures = '0.3.30'
-  getopts = '0.2.21'
-  kanal = '0.1.0-pre8'
+  futures = "0.3.31"
+  getopts = "0.2.24"
+  kanal = "0.1.1"
   rocket = '0.5.1'
 
-  serde = {features = ['derive'], version = "1.0.210" }
-  serde_json = {version = "1.0.128", features = []}
-  rocksdb = "0.21.0"
-  tokio =  { features = ['sync', 'rt', 'rt-multi-thread', 'macros', 'time'], version = "1.40.0" }
+  serde = {features = ['derive'], version = "1.0.228" }
+  serde_json = {version = "1.0.145", features = []}
+  rocksdb = "0.24.0"
+  tokio =  { features = ['sync', 'rt', 'rt-multi-thread', 'macros', 'time'], version = "1.47.1" }
 
 [dev-dependencies]
-  testcontainers  = '0.15.0'
+  testcontainers  = "0.25.0"
 
 [package]
   edition = '2021'

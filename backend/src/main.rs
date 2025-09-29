@@ -1,8 +1,9 @@
 // Prevents additional console window on Windows in release, DO NOT REMOVE!!
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
+use std::env;
 use std::error::Error;
-
+use rocket::fs::FileServer;
 use rocket::routes;
 use tauri::{App, AppHandle};
 

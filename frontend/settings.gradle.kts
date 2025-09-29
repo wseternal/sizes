@@ -1,4 +1,4 @@
-rootProject.name = "frontend"
+rootProject.name = "sizes"
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 pluginManagement {

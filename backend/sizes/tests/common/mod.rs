@@ -1,12 +1,16 @@
 use sizes::StaticBox;
 use std::time::Duration;
+
+/*
 use testcontainers::{
     clients::Cli,
     core::{Port, WaitFor},
     Container, GenericImage, RunnableImage,
 };
+*/
 use tokio::{runtime::Runtime, sync::OnceCell};
 
+/*
 const SURREAL_DB_PORT: u16 = 8000;
 
 pub struct TestFixture {
@@ -50,7 +54,7 @@ pub async fn get_test_fixture() -> &'static TestFixture {
         })
         .await
 }
-
+*/
 
 pub fn get_tokio_runtime() -> Runtime {
     tokio::runtime::Builder::new_multi_thread()

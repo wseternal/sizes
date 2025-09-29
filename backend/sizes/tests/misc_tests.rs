@@ -17,5 +17,5 @@ fn read_file() {
 fn test_common_error() {
     let s =  "some error description";
     let err = Error::new(s);
-    println!("err is {}", err.as_str());
+    println!("err is {}", err);
 }

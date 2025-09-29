@@ -1,15 +1,15 @@
 [dependencies]
 
-tauri = { features = [], version = "1.8.0" }
+tauri = { features = [], version = "2.8.5" }
 
 rocket =  { features = ["json"], version = "0.5.1" }
-serde = { features = ['derive'], version = "1.0.210" }
-serde_json = { version = "1.0.128", features = [] }
+serde = { features = ['derive'], version = "1.0.228" }
+serde_json = { version = "1.0.145", features = [] }
 
 sizes = { path = "sizes" }
 
 [build-dependencies]
-tauri-build = { features = [], version = "1.5.5" }
+tauri-build = { features = [], version = "2.4.1" }
 
 [features]
 custom-protocol = ["tauri/custom-protocol"]

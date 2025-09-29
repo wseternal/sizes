@@ -1,57 +1,50 @@
 {
   "build": {
-    "beforeBuildCommand": "bun run --cwd frontend build",
-    "beforeDevCommand": "bun run --cwd frontend dev",
-    "devPath": "https://localhost:3000",
-    "distDir": "../frontend/dist"
+    "beforeBuildCommand": "cd frontend && ./gradlew :composeApp:wasmJsBrowserDevelopmentExecutableDistribution",
+    "beforeDevCommand": "cd frontend && ./gradlew wasmJsBrowserDevelopmentRun",
+    "frontendDist": "../frontend/composeApp/build/dist",
+    "devUrl": "http://localhost:8080"
   },
-  "package": {
-    "productName": "sizes",
-    "version": "0.1.0"
-  },
-  "tauri": {
-    "allowlist": {
-      "all": false
+  "bundle": {
+    "active": true,
+    "category": "DeveloperTool",
+    "copyright": "",
+    "targets": "all",
+    "externalBin": [],
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
+    ],
+    "windows": {
+      "certificateThumbprint": null,
+      "digestAlgorithm": "sha256",
+      "timestampUrl": ""
     },
-    "bundle": {
-      "active": true,
-      "category": "DeveloperTool",
-      "copyright": "",
+    "longDescription": "",
+    "macOS": {
+      "entitlements": null,
+      "exceptionDomain": "",
+      "frameworks": [],
+      "providerShortName": null,
+      "signingIdentity": null
+    },
+    "resources": [],
+    "shortDescription": "",
+    "linux": {
       "deb": {
         "depends": []
-      },
-      "externalBin": [],
-      "icon": [
-        "icons/32x32.png",
-        "icons/128x128.png",
-        "icons/128x128@2x.png",
-        "icons/icon.icns",
-        "icons/icon.ico"
-      ],
-      "identifier": "cid.zhaohua.sizes",
-      "longDescription": "",
-      "macOS": {
-        "entitlements": null,
-        "exceptionDomain": "",
-        "frameworks": [],
-        "providerShortName": null,
-        "signingIdentity": null
-      },
-      "resources": [],
-      "shortDescription": "",
-      "targets": "all",
-      "windows": {
-        "certificateThumbprint": null,
-        "digestAlgorithm": "sha256",
-        "timestampUrl": ""
       }
-    },
-    "security": {
-      "csp": null
-    },
-    "updater": {
-      "active": false
-    },
+    }
+  },
+  "productName": "sizes",
+  "mainBinaryName": "sizes",
+  "version": "0.1.0",
+  "identifier": "cid.zhaohua.sizes",
+  "plugins": {},
+  "app": {
     "windows": [
       {
         "fullscreen": false,
@@ -59,8 +52,12 @@
         "resizable": true,
         "title": "sizes",
         "label": "main",
-        "width": 1440
+        "width": 1440,
+        "useHttpsScheme": true
       }
-    ]
+    ],
+    "security": {
+      "csp": null
+    }
   }
 }
