@@ -1,9 +1,9 @@
 {
   "build": {
-    "beforeBuildCommand": "cd frontend && ./gradlew :composeApp:wasmJsBrowserDevelopmentExecutableDistribution",
-    "beforeDevCommand": "cd frontend && ./gradlew wasmJsBrowserDevelopmentRun",
-    "frontendDist": "../frontend/composeApp/build/dist",
-    "devUrl": "http://localhost:8080"
+    "beforeBuildCommand": "cd frontend && ./gradlew wasmJsBrowserDistribution",
+    "frontendDist": "../frontend/composeApp/build/dist/wasmJs/productionExecutable/",
+    "beforeDevCommand": "cd frontend && ./gradlew wasmJsBrowserDevelopmentExecutableDistribution",
+    "devUrl": "http://localhost:8000"
   },
   "bundle": {
     "active": true,

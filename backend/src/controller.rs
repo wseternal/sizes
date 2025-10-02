@@ -10,7 +10,6 @@ use sizes::db::dirstat::{get_dir_stat_recursive, DirStat};
 use std::collections::HashMap;
 use std::fmt::Debug;
 use std::path::{Path, PathBuf};
-
 use crate::AppState;
 use sizes::db::scanresult::{self, get_last_dir_scan_result};
 use sizes::scan::{DirScanOverview, DirScanResult};
@@ -62,25 +61,17 @@ pub async fn scan_dir(app_state: &State<AppState>, path: &str) -> ResultResponde
     ResultResponder::from(format!("queued scan dir command for {} successfully", path))
 }
 
-#[get("/api/progress?<path>")]
+#[get("/api/progress")]
 pub async fn scan_dir_progress(
-    app_state: &State<AppState>,
-    path: &str,
-) -> ResultResponder<DirScanResult> {
-    let progress = app_state
+    app_state: &State<AppState>
+) -> ResultResponder<HashMap<PathBuf, DirScanResult>> {
+    let ongoings = app_state
         .client
         .task_manager
-        .scan_progress(PathBuf::from(path))
+        .scan_progress()
         .await;
 
-    let db = app_state.client.db;
-    let ret = if progress.is_none() {
-        get_last_dir_scan_result(db, Path::new(path))
-    } else {
-        progress
-    };
-
-    ResultResponder::from(ret.unwrap_or(DirScanResult::new()))
+        ResultResponder::from(ongoings)
 }
 
 #[get("/api/result?<path>")]

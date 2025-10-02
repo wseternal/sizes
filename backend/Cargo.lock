@@ -62,7 +62,6 @@ version = "0.0.1"
 dependencies = [
  "rocket",
  "serde",
- "serde_json",
  "sizes",
  "tauri",
  "tauri-build",

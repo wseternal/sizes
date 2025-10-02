@@ -1,6 +1,7 @@
 use std::collections::HashMap;
 use std::error::Error;
 use std::fmt::Display;
+use std::iter::Map;
 use std::path::PathBuf;
 use std::sync::Arc;
 use std::time::Instant;
@@ -59,17 +60,21 @@ impl TaskManager {
         self.tx.send(cmd).await
     }
 
-    pub async fn scan_progress(&self, path: PathBuf) -> Option<DirScanResult> {
-        let cmd = Command::ScanDir(path);
+    pub async fn scan_progress(&self) -> HashMap<PathBuf, DirScanResult> {
+        let cmd = Command::ScanDir(PathBuf::from("/"));
+
+        let mut tasks = HashMap::new();
         let r = self.ongoing_tasks.read().await;
-        if !r.contains_key(&cmd) {
-            return None;
-        }
-        r.get(&cmd).map(|e| {
-            let mut r = (*e).clone();
-            r.ongoing = true;
-            r
-        })
+        r.iter().for_each(|(k_ref, v_ref)| {
+            if let Command::ScanDir(path) = k_ref {
+                let mut elem = (*v_ref).clone();
+                elem.ongoing = true;
+                tasks.insert(path.clone(), elem);
+            }
+        });
+        drop(r);
+
+        tasks
     }
 
     async fn command_manager_task(&self, rx: AsyncReceiver<Command>) -> Result<(), Box<dyn Error>> {

@@ -2,12 +2,13 @@
   futures = "0.3.31"
   getopts = "0.2.24"
   kanal = "0.1.1"
-  rocket = '0.5.1'
+  rocket = { workspace = true }
 
-  serde = {features = ['derive'], version = "1.0.228" }
-  serde_json = {version = "1.0.145", features = []}
+  serde = {features = ['derive'], workspace = true }
+  serde_json = { workspace = true}
+  tokio =  { features = ['sync', 'rt', 'rt-multi-thread', 'macros', 'time'], workspace = true }
+
   rocksdb = "0.24.0"
-  tokio =  { features = ['sync', 'rt', 'rt-multi-thread', 'macros', 'time'], version = "1.47.1" }
 
 [dev-dependencies]
   testcontainers  = "0.25.0"

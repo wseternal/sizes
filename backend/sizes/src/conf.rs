@@ -1,5 +1,4 @@
 use std::{path::PathBuf, sync::OnceLock};
-
 use serde::{Deserialize, Serialize};
 
 use crate::kvstore::KvStore;
