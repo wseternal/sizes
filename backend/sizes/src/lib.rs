@@ -4,7 +4,6 @@ use std::cell::UnsafeCell;
 use std::env::{self};
 use std::path::PathBuf;
 use std::time::{SystemTime, UNIX_EPOCH};
-use rocket::form::validate::msg;
 use crate::conf::app_db_path;
 
 pub mod cmd;

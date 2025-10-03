@@ -4,8 +4,9 @@ use crate::scan::DirScanOverview;
 use crate::unix;
 use serde::{Deserialize, Serialize};
 use std::path::{Path, PathBuf};
+use schemars::JsonSchema;
 
-#[derive(Debug, Serialize, Deserialize, Default, Clone)]
+#[derive(Debug, Serialize, Deserialize, Default, Clone, JsonSchema)]
 pub struct DirStat {
     pub ts: u64,
     pub mtime: i64,

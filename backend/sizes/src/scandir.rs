@@ -3,7 +3,6 @@ use crate::scan;
 use futures::future::BoxFuture;
 use futures::FutureExt;
 use std::collections::VecDeque;
-use std::fmt::Display;
 use std::io;
 use std::path::{Path, PathBuf};
 use std::sync::Arc;

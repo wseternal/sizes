@@ -3,12 +3,16 @@ sizes = { workspace = true }
 tauri = { features = [], version = "2.8.5" }
 rocket = { workspace = true }
 serde = { workspace = true }
+rocket_okapi = { workspace = true , features = ["swagger", "rapidoc"] }
 
 [workspace.dependencies]
 rocket =  { features = ["json"], version = "0.5.1" }
 serde = { features = ['derive'], version = "1.0.228" }
 serde_json = { version = "1.0.145", features = [] }
 tokio =  { features = ['sync', 'rt', 'rt-multi-thread', 'macros', 'time'], version = "1.47.1" }
+
+rocket_okapi = { version = "0.9.0", features = ["swagger", "rapidoc"] }
+schemars = { version = "0.8.22", features = ["derive"] }
 
 sizes = { path = "sizes" }
 

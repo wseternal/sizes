@@ -1,4 +1,5 @@
 use std::{path::PathBuf, sync::OnceLock};
+use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 
 use crate::kvstore::KvStore;
@@ -9,7 +10,7 @@ use crate::{
 
 static CONF_KEY_WATCHES: &str = "watches";
 
-#[derive(Debug, Serialize, Deserialize, Clone, Hash, Eq, PartialEq)]
+#[derive(Debug, Serialize, Deserialize, Clone, Hash, Eq, PartialEq, JsonSchema)]
 pub struct WatchDirectoryConfiguration {
     pub refresh_interval: String,
     pub label: String,

@@ -4,12 +4,13 @@ use std::os::macos::fs::MetadataExt;
 use std::ops::AddAssign;
 use rocket::serde::{Deserialize, Serialize};
 use std::fmt::{Display, Formatter};
+use schemars::JsonSchema;
 use crate::db::dirstat;
 use crate::db::dirstat::DirStat;
 use crate::kvstore::KvStore;
 use crate::unix;
 
-#[derive(Debug, Clone, Default, Serialize, Deserialize)]
+#[derive(Debug, Clone, Default, Serialize, Deserialize, JsonSchema)]
 pub struct DirScanOverview {
     pub dirs: u64,
     pub files: u64,
@@ -39,7 +40,7 @@ impl AddAssign<&Self> for DirScanOverview {
     }
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
 pub struct DirScanResult {
     pub cached: DirScanOverview,
     pub scanned: DirScanOverview,
