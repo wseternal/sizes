@@ -4,7 +4,10 @@
 use rocket::routes;
 use std::env;
 use std::error::Error;
+use rocket::fairing::AdHoc;
 use rocket::fs::FileServer;
+use rocket::http::Method;
+use rocket::yansi::Paint;
 use tauri::{App, AppHandle};
 
 use crate::controller::{
@@ -34,6 +37,11 @@ fn setup(app: &mut App) -> Result<(), Box<dyn Error>> {
         let client = sizes::init().await;
         let rocket_builder = rocket::build()
             .manage(AppState { client, handle })
+            .attach(AdHoc::on_response("cors", |_, res| {
+                Box::pin(async move {
+                    res.set_raw_header("Access-Control-Allow-Origin", "*");
+                })
+            }))
             .mount(
                 "/sizes",
                 routes![

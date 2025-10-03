@@ -101,31 +101,31 @@ pub fn dir_results(
 #[get("/api/watches")]
 pub fn list_watch_dir(
     app_state: &State<AppState>,
-) -> ResultResponder<Vec<WatchDirectoryConfiguration>> {
+) -> Json<Vec<WatchDirectoryConfiguration>> {
     let watches = conf::list_watch(app_state.client.db);
-    ResultResponder::from(watches)
+    Json(watches)
 }
 
 #[post("/api/watches/add", data = "<watch>")]
 pub fn add_watch_dir(
     app_state: &State<AppState>,
     watch: Json<WatchDirectoryConfiguration>,
-) -> ResultResponder<Vec<WatchDirectoryConfiguration>> {
+) -> Json<Vec<WatchDirectoryConfiguration>> {
     let db = app_state.client.db;
     conf::add_watch(db, &watch.0).unwrap();
     let watches = conf::list_watch(db);
-    ResultResponder::from(watches)
+    Json(watches)
 }
 
 #[post("/api/watches/delete", data = "<watch>")]
 pub fn remove_watch_dir(
     app_state: &State<AppState>,
     watch: Json<WatchDirectoryConfiguration>,
-) -> ResultResponder<Vec<WatchDirectoryConfiguration>> {
+) -> Json<Vec<WatchDirectoryConfiguration>> {
     let db = app_state.client.db;
     conf::remove_watch(db, &watch.0).unwrap();
     let watches = conf::list_watch(db);
-    ResultResponder::from(watches)
+    Json(watches)
 }
 
 #[get("/api/largest?<min>&<limit>&<offset>")]
