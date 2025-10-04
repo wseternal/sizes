@@ -9,6 +9,7 @@ plugins {
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.composeHotReload)
 
+    alias(libs.plugins.kotlinSerialization)
     // ktorfit
     alias(libs.plugins.ksp)
     alias(libs.plugins.ktorfit)
@@ -64,7 +65,7 @@ kotlin {
 
             // ktorfit related
             implementation(libs.bundles.ktorfit)
-            implementation(libs.ktor.client.cio)
+            implementation(libs.ktor.client.core)
             implementation(libs.ktor.clientNegotiation)
             implementation(libs.ktor.serialization.kotlinx.json)
         }
@@ -74,6 +75,9 @@ kotlin {
         jvmMain.dependencies {
             implementation(compose.desktop.currentOs)
             implementation(libs.kotlinx.coroutinesSwing)
+        }
+        wasmJsMain.dependencies {
+            implementation(libs.ktor.client.js)
         }
     }
 }

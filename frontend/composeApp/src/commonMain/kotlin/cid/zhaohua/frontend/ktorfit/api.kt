@@ -2,11 +2,12 @@ package cid.zhaohua.frontend.ktorfit
 
 import de.jensklingenberg.ktorfit.Ktorfit
 import io.ktor.client.HttpClient
-import io.ktor.client.engine.cio.CIO
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.serialization.kotlinx.json.json
+import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 
+@Serializable
 data class WatchDirectoryConfiguration (
     val refreshInterval: String,
     val label: String,
@@ -14,7 +15,7 @@ data class WatchDirectoryConfiguration (
 )
 
 fun initSizesApi(): SizesApi {
-    val client = HttpClient(CIO) {
+    val client = HttpClient {
         install(ContentNegotiation) {
             json(Json {
                 prettyPrint = true

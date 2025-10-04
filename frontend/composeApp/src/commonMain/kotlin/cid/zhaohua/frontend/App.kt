@@ -11,6 +11,7 @@ import cid.zhaohua.frontend.ui.AppContext
 import cid.zhaohua.frontend.ui.AppDrawer
 import cid.zhaohua.frontend.ui.AppDrawerItem
 import cid.zhaohua.frontend.ui.AppScaffold
+import cid.zhaohua.frontend.ui.pages.SettingsPage
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
@@ -28,11 +29,10 @@ fun init(): AppContext {
     val appContext = AppContext()
     val drawerItems = listOf(
         AppDrawerItem("home", "Home", Icons.Filled.Home, { appContext.itemSelected = it }),
-        AppDrawerItem("apitest", "ApiTest", Icons.Filled.Api, {appContext.itemSelected = it}),
         AppDrawerItem("settings", "Settings", Icons.Filled.Settings, {appContext.itemSelected = it}),
     )
     appContext.drawerItems = drawerItems
     appContext.sizesApi = initSizesApi()
-
+    appContext.pageSuppliers["settings"] = { SettingsPage(appContext) }
     return appContext
 }
