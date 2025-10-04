@@ -7,6 +7,11 @@ import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 
+data class WatchDirectoryConfiguration (
+    val refreshInterval: String,
+    val label: String,
+    val path: String
+)
 
 fun initSizesApi(): SizesApi {
     val client = HttpClient(CIO) {
@@ -22,6 +27,5 @@ fun initSizesApi(): SizesApi {
     val ktorfit = Ktorfit.Builder()
         .httpClient(client)
         .baseUrl("http://127.0.0.1:8000/sizes/").build()
-    val consoleApi = ktorfit.createSizesApi()
-    return consoleApi
+    return ktorfit.createSizesApi()
 }
