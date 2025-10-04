@@ -1,49 +1,38 @@
 package cid.zhaohua.frontend
 
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.safeContentPadding
-import androidx.compose.material3.Button
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Api
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import org.jetbrains.compose.resources.painterResource
+import cid.zhaohua.frontend.ktorfit.initSizesApi
+import cid.zhaohua.frontend.ui.AppContext
+import cid.zhaohua.frontend.ui.AppDrawer
+import cid.zhaohua.frontend.ui.AppDrawerItem
+import cid.zhaohua.frontend.ui.AppScaffold
 import org.jetbrains.compose.ui.tooling.preview.Preview
-
-import sizes.composeapp.generated.resources.Res
-import sizes.composeapp.generated.resources.compose_multiplatform
 
 @Composable
 @Preview
 fun App() {
+    val appContext = init()
     MaterialTheme {
-        var showContent by remember { mutableStateOf(false) }
-        Column(
-            modifier = Modifier
-                .background(MaterialTheme.colorScheme.primaryContainer)
-                .safeContentPadding()
-                .fillMaxSize(),
-            horizontalAlignment = Alignment.CenterHorizontally,
-        ) {
-            Button(onClick = { showContent = !showContent }) {
-                Text("Click me!")
-            }
-            AnimatedVisibility(showContent) {
-                val greeting = remember { Greeting().greet() }
-                Column(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                ) {
-                    Image(painterResource(Res.drawable.compose_multiplatform), null)
-                    Text("Compose: $greeting")
-                }
-            }
+        AppDrawer(appContext) {
+            AppScaffold(appContext)
         }
     }
+}
+
+fun init(): AppContext {
+    val appContext = AppContext()
+    val drawerItems = listOf(
+        AppDrawerItem("home", "Home", Icons.Filled.Home, { appContext.itemSelected = it }),
+        AppDrawerItem("apitest", "ApiTest", Icons.Filled.Api, {appContext.itemSelected = it}),
+        AppDrawerItem("settings", "Settings", Icons.Filled.Settings, {appContext.itemSelected = it}),
+    )
+    appContext.drawerItems = drawerItems
+    appContext.sizesApi = initSizesApi()
+
+    return appContext
 }
