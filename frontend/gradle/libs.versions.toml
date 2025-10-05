@@ -39,7 +39,6 @@ ktor-client-js = { module = "io.ktor:ktor-client-js", version.ref = "ktor" }
 ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
 
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version="kotlinx-coroutines" }
-kotlinx-coroutines-js = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core-js", version="kotlinx-coroutines" }
 
 material-icons-extend = { module = "org.jetbrains.compose.material:material-icons-extended", version = "1.7.3" }
 
@@ -61,5 +60,5 @@ composeMultiplatform = { id = "org.jetbrains.compose", version.ref = "composeMul
 composeCompiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 kotlinSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
-ksp = { id = "com.google.devtools.ksp", version = "2.2.20-2.0.3" }
+ksp = { id = "com.google.devtools.ksp", version = "2.2.20-2.0.2" }
 ktorfit = { id = "de.jensklingenberg.ktorfit", version.ref = "ktorfit" }

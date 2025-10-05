@@ -23,7 +23,7 @@ import androidx.compose.ui.unit.dp
 import cid.zhaohua.frontend.ktorfit.SizesApi
 import cid.zhaohua.frontend.ktorfit.WatchDirectoryConfiguration
 import cid.zhaohua.frontend.ui.AppContext
-import cid.zhaohua.frontend.ui.TableCell
+import cid.zhaohua.frontend.ui.TextCell
 import kotlinx.coroutines.launch
 
 @Composable
@@ -62,9 +62,9 @@ private fun TableRows(dirs: SnapshotStateList<WatchDirectoryConfiguration>) {
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceAround
         ) {
-            TableCell(text = it.path, weight = 0.30f)
-            TableCell(text = it.label, weight = 0.20f)
-            TableCell(text = it.refreshInterval, weight = 0.10f)
+            TextCell(text = it.path, weight = 0.30f)
+            TextCell(text = it.label, weight = 0.20f)
+            TextCell(text = it.refreshInterval, weight = 0.10f)
             Row(
                 modifier = Modifier.weight(0.40f),
                 horizontalArrangement = Arrangement.Center
@@ -90,9 +90,9 @@ private fun TableHeader() {
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceAround
     ) {
-        TableCell(text = "Path", isHeader = true, weight = 0.30f)
-        TableCell(text = "Label", isHeader = true, weight = 0.20f)
-        TableCell(text = "Refresh Interval", isHeader = true, weight = 0.10f)
-        TableCell(text = "Action", isHeader = true, weight = 0.40f)
+        TextCell(text = "Path", isHeader = true, weight = 0.30f)
+        TextCell(text = "Label", isHeader = true, weight = 0.20f)
+        TextCell(text = "Refresh Interval", isHeader = true, weight = 0.10f)
+        TextCell(text = "Action", isHeader = true, weight = 0.40f)
     }
 }
