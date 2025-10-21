@@ -1,6 +1,7 @@
 package cid.zhaohua.frontend.ui.components.jsontable
 
 import RowSpanParentData
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -16,7 +17,22 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import org.jetbrains.compose.ui.tooling.preview.Preview
 import kotlin.math.ceil
+
+@Preview
+@Composable
+fun demo1() {
+    Table (lineWidth = 2.dp, lineColor = Color.Blue) {
+        Row {
+            Text(text = "Cell 1")
+            Text(text = "Cell 2")
+        }
+        Row {
+            Text(text = "Long cell", modifier = Modifier.columnSpan(2))
+        }
+    }
+}
 
 @Composable
 fun Table(
@@ -24,11 +40,17 @@ fun Table(
     showGridLines: Boolean = true,
     lineWidth: Dp = 1.dp,
     lineColor: Color = Color.DarkGray,
-    content: TableScope.() -> Unit
+    content: @Composable TableScope.() -> Unit
 ) {
     var horizontalLines by remember { mutableStateOf<Map<Float, Map<Float, Float>>>(mapOf()) }
     var verticalLines by remember { mutableStateOf<Map<Float, Map<Float, Float>>>(mapOf()) }
 
+    val rows = mutableListOf<@Composable TableRowScope.() -> Unit>()
+    content(object : TableScope {
+        override fun Row(rowContent: @Composable TableRowScope.() -> Unit) {
+            rows += rowContent
+        }
+    })
     SubcomposeLayout(modifier = modifier.drawBehind {
 
         val lineWidthFloatPix: Float = LocalDensity.run { lineWidth.toPx() }
@@ -58,13 +80,6 @@ fun Table(
         val lineWidthFloatPix: Float =
             if (showGridLines) LocalDensity.run { lineWidth.toPx() } else 0f
         val lineWidthPix = if (showGridLines) ceil(lineWidthFloatPix).toInt() else 0
-
-        val rows = mutableListOf<@Composable TableRowScope.() -> Unit>()
-        content(object : TableScope {
-            override fun Row(rowContent: @Composable TableRowScope.() -> Unit) {
-                rows += rowContent
-            }
-        })
         val cells = mutableListOf<Cell>()
         val chessBoard = mutableSetOf<Pair<Int, Int>>()
         val noxline = mutableSetOf<Pair<Int, Int>>()

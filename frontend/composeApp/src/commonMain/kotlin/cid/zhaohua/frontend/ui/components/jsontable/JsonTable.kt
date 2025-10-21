@@ -1,23 +1,19 @@
 package cid.zhaohua.frontend.ui.components.jsontable
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Dataset
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import cid.zhaohua.frontend.ui.TextCell
+import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.*
 import org.jetbrains.compose.ui.tooling.preview.Preview
-import kotlin.math.max
 
 @Composable
 fun JsonTable(data: TableData) {
@@ -26,47 +22,28 @@ fun JsonTable(data: TableData) {
         colors = CardDefaults.cardColors(colorScheme.surface)
     ) {
         if (data.items.isEmpty()) {
-            Row(
-                horizontalArrangement = Arrangement.SpaceAround,
-                verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Icons.Default.Dataset
-                TextCell(text = "Empty", isHeader = true)
+            Table {
+                Row {
+                    Icons.Default.Dataset
+                    TextCell(text = "Empty", isHeader = true)
+                }
             }
             return@Card
         }
         val conf = data.conf ?: configFromData(data.items.first())
-        HeaderRow(data.items, conf)
-        HorizontalDivider()
-        DataRows(data.items, conf)
-    }
-}
-
-@Composable
-private fun DataRows(items: Collection<JsonObject>, config: TableConfig) {
-    val weight = 1.0 / max(1, config.columns.size)
-    items.forEach { row ->
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceAround
-        ) {
-            config.columns.forEach {
-                TextCell(text = row[it.key]?.jsonPrimitive?.content ?: "", weight = weight.toFloat())
+        Table {
+            Row {
+                conf.columns.forEach { config ->
+                    TextCell(text = config.label, isHeader = true)
+                }
             }
-        }
-    }
-}
-
-@Composable
-private fun HeaderRow(items: Collection<JsonObject>, config: TableConfig) {
-    val weight  = 1.0 / max(1, config.columns.size)
-    Row(
-        modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.SpaceAround
-    ) {
-        config.columns.forEach { config ->
-            TextCell(text = config.label, isHeader = true, weight = weight.toFloat())
+            data.items.forEach { row ->
+                Row {
+                    conf.columns.forEach {
+                        TextCell(text = row[it.key]?.jsonPrimitive?.content ?: "")
+                    }
+                }
+            }
         }
     }
 }
@@ -93,7 +70,7 @@ private fun configFromData(data: JsonObject): TableConfig {
 
 @Preview
 @Composable
-fun demo() {
+fun Demo() {
     val params = """
     {
         "name": "some name here",
@@ -102,6 +79,6 @@ fun demo() {
         "refresh_interval": 5
     }
     """.trimIndent()
-    val jsonObject = Json.encodeToJsonElement(params).jsonObject
+    val jsonObject = Json.decodeFromString<JsonObject>(params)
     JsonTable(TableData(listOf(jsonObject), null))
 }

@@ -11,6 +11,7 @@ import cid.zhaohua.frontend.ui.AppContext
 import cid.zhaohua.frontend.ui.AppDrawer
 import cid.zhaohua.frontend.ui.AppDrawerItem
 import cid.zhaohua.frontend.ui.AppScaffold
+import cid.zhaohua.frontend.ui.components.jsontable.Demo
 import cid.zhaohua.frontend.ui.pages.SettingsPage
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
@@ -33,6 +34,6 @@ fun init(): AppContext {
     )
     appContext.drawerItems = drawerItems
     appContext.sizesApi = initSizesApi()
-    appContext.pageSuppliers["settings"] = { SettingsPage(appContext) }
+    appContext.pageSuppliers["settings"] = { Demo() }
     return appContext
 }

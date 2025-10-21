@@ -6,6 +6,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.Modifier.Companion
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -16,11 +17,24 @@ fun RowScope.TextCell(
     isHeader: Boolean = false,
     weight: Float? = null
 ) {
-    Text(
+    TextCell(
         text = text,
+        isHeader = isHeader,
         modifier = Modifier.padding(8.dp).apply {
             weight?.let { this.weight(it) }
-        },
+        }
+    )
+}
+
+@Composable
+fun TextCell(
+    text: String,
+    isHeader: Boolean = false,
+    modifier: Modifier = Modifier,
+) {
+    Text(
+        text = text,
+        modifier = Modifier.padding(8.dp),
         fontWeight = if (isHeader) FontWeight.Bold else FontWeight.Normal
     )
 }
